@@ -1,0 +1,8 @@
+# vim backup files
+*~
+*.swp
+*.bak
+
+# build files
+clockres.o
+clockres
