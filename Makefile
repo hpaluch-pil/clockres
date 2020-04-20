@@ -6,11 +6,11 @@ CFLAGS  += -g -Wall
 LDLIBS  += -lm
 LDFLAGS += -g
 
-# LINK -lrt if it exists (neede on some ARM platforms)
-# NOTE: scratchbox make has no $(.SHELLSTATUS) yet (since make 4.2)
-RT_STATUS := $(shell test -r /usr/lib/librt.a; echo $$?)
-#$(info RT_STATUS is: $(RT_STATUS) )
-ifeq ($(RT_STATUS),0)
+ifeq ($(os),qnx)
+CC=qcc
+endif
+
+ifeq ($(os),scratchbox)
  LDLIBS += -lrt
 endif 
 
@@ -18,6 +18,9 @@ APP := clockres
 all : $(APP)
 $(APP) : $(APP).o
 $(APP).o : $(APP).c
+
+.PHONY: rebuild
+rebuild: clean $(APP)
 
 .PHONY: run
 run : $(APP)
