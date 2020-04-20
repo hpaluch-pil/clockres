@@ -10,6 +10,11 @@ ifeq ($(os),qnx)
 CC=qcc
 endif
 
+ifeq ($(os),qnx_x86_64)
+CC=qcc -Vgcc_ntox86_64
+endif
+
+
 ifeq ($(os),scratchbox)
  LDLIBS += -lrt
 endif 

@@ -35,12 +35,12 @@ Tested on Linux Host (CentOS 5.4). For build just use:
 ```
 /opt/qnx650/host/linux/x86/usr/bin/make os=qnx
 ```
-## On  QNX7
+## On  QNX7 `x86_64`
 
 Tested on Linux Host (Ubuntu 16.04.6 LTS). For build use:
 ```
 source ~/qnx700/qnxsdp-env.sh
-make os=qnx
+make os=qnx_x86_64
 ```
 
 
