@@ -53,6 +53,9 @@ const clock_table_t MY_CLK_TABLE[] = {
 #ifdef CLOCK_BOOTTIME_ALARM
 		,CLKRES_INIT_PAIR(CLOCK_BOOTTIME_ALARM)
 #endif
+#ifdef CLOCK_SOFTTIME
+		,CLKRES_INIT_PAIR(CLOCK_SOFTTIME)
+#endif
 };
 
 const int N_MY_CLK_TABLE = (int)(sizeof(MY_CLK_TABLE)/sizeof(clock_table_t));
