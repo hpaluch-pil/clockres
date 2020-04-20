@@ -7,11 +7,13 @@ LDLIBS  += -lm
 LDFLAGS += -g
 
 ifeq ($(os),qnx)
-CC=qcc
+ CC=qcc
+ CFLAGS += -DUSE_CLOCK_CYCLES
 endif
 
 ifeq ($(os),qnx_x86_64)
-CC=qcc -Vgcc_ntox86_64
+ CC=qcc -Vgcc_ntox86_64
+ CFLAGS += -DUSE_CLOCK_CYCLES
 endif
 
 

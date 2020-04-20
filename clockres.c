@@ -8,16 +8,27 @@
 #include <stdint.h>
 #include <inttypes.h>
 
+#ifdef USE_CLOCK_CYCLES
+#include <sys/neutrino.h>
+#include <sys/syspage.h>
+#endif
 
 /* time measurement macros - Linux */
 
 #define MY_CLK_TIMING_ID CLOCK_MONOTONIC
 
+#ifdef USE_CLOCK_CYCLES
+#define MY_TIME_DECL(var)  uint64_t var##_start, var##_end
+#define MY_TIME_START(var) var##_start = ClockCycles()
+#define MY_TIME_END(var)   var##_end = ClockCycles()
+#define MY_TIME_GET_NS(var) ( (var##_end - var##_start)*1000000000/SYSPAGE_ENTRY(qtime)->cycles_per_sec  )
+#else
 #define MY_TIME_DECL(var)  struct timespec var##_start, var##_end
 #define MY_TIME_START(var) clock_gettime(MY_CLK_TIMING_ID,&var##_start)
 #define MY_TIME_END(var)   clock_gettime(MY_CLK_TIMING_ID,&var##_end)
 #define MY_TIME_GET_NS(var) (  (var##_end.tv_sec * (uint64_t)(1000000000) + var##_end.tv_nsec) \
                                    -(var##_start.tv_sec * (uint64_t)(1000000000) + var##_start.tv_nsec) )
+#endif
 
 typedef struct {
 	clockid_t clock_id;
@@ -77,6 +88,18 @@ int main(int argc, char **argv)
 {
 	int ret = EXIT_SUCCESS;
 	int i;
+
+#ifdef USE_CLOCK_CYCLES
+	
+	printf("This OS Supports ClockCycles():\n");
+	printf("\tCycles per second: %" PRIu64 "\n",
+		(uint64_t)SYSPAGE_ENTRY(qtime)->cycles_per_sec);
+	printf("\tWrap occurs on every %" PRIu64 " [s]\n",
+		(~(uint64_t)0)/SYSPAGE_ENTRY(qtime)->cycles_per_sec);
+	if (ThreadCtl(_NTO_TCTL_RUNMASK, (void*)0x1)){
+		perror("ThreadCtl(_NTO_TCTL_RUNMASK,...)");
+	}
+#endif
 
 	for(i=0;i<N_MY_CLK_TABLE;i++){
 		struct timespec rs;
