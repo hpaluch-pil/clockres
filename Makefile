@@ -2,7 +2,11 @@
 # Makefile - for Linux
 #
 
-CFLAGS += -g -Wall
+CFLAGS  += -g -Wall
+LDLIBS  += -lm
+LDFLAGS += -g
+
+# LINK -lrt if it exists (neede on some ARM platforms)
 # NOTE: scratchbox make has no $(.SHELLSTATUS) yet (since make 4.2)
 RT_STATUS := $(shell test -r /usr/lib/librt.a; echo $$?)
 #$(info RT_STATUS is: $(RT_STATUS) )
