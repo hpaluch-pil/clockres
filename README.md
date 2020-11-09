@@ -52,3 +52,22 @@ Obviously can be used for self-hosted builds (but cross-builds).
 make run
 ```
 
+# Distribution
+
+You can now create native Debian packages thanks to
+metadata under `debian/` directory.
+
+To generate just binary `.deb` package in parent directory, issue:
+```bash
+debuild -i -us -uc -b
+```
+
+To generate source deb-src files (useful if you plan to
+user `pbuilder` - personal builder for many Debian versions)
+under `chroot`:
+
+```bash
+debuild -i -us -uc -S
+```
+
+
