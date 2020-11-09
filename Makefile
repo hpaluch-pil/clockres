@@ -26,14 +26,13 @@ all : $(APP)
 $(APP) : $(APP).o
 $(APP).o : $(APP).c
 
-.PHONY: rebuild
 rebuild: clean $(APP)
 
-.PHONY: run
 run : $(APP)
 	./$(APP)	
 
-.PHONY: clean
 clean:
 	rm -f -- $(APP) $(APP).o
+
+.PHONY: all rebuild run clean
 
