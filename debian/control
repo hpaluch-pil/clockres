@@ -1,0 +1,16 @@
+Source: clockres
+Section: utils
+Priority: optional
+Maintainer: <Henryk Paluch>
+Build-Depends: debhelper (>=11~)
+Standards-Version: 4.1.4
+Homepage: https://github.com/hpaluch-pil/clockres
+
+Package: clockres
+Architecture: any
+Multi-Arch: foreign
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: reports clock resolution for clock_gettime(2)
+ Simple native binary that reports clocks resolution
+ for clock supported by call clock_gettime(2)
+
