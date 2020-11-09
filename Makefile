@@ -2,6 +2,8 @@
 # Makefile - for Linux
 #
 
+prefix = /usr/local
+
 CFLAGS  += -g -Wall
 LDLIBS  += -lm
 LDFLAGS += -g
@@ -34,5 +36,11 @@ run : $(APP)
 clean:
 	rm -f -- $(APP) $(APP).o
 
-.PHONY: all rebuild run clean
+install: $(APP)
+	install -D -m 755 $(APP) $(DESTDIR)$(prefix)/bin/$(APP)
+
+uninstall:
+	-rm -f $(DESTDIR)$(prefix)/bin/$(APP)
+
+.PHONY: all rebuild run clean install uninstall
 
