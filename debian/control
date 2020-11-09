@@ -1,7 +1,7 @@
 Source: clockres
 Section: utils
 Priority: optional
-Maintainer: <Henryk Paluch>
+Maintainer: Henryk Paluch <henryk.paluch@pickering.cz>
 Build-Depends: debhelper (>=11~)
 Standards-Version: 4.1.4
 Homepage: https://github.com/hpaluch-pil/clockres

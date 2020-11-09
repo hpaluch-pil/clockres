@@ -6,3 +6,10 @@
 # build files
 clockres.o
 clockres
+
+# Debian build files
+*.log
+*.substvars
+debian/debhelper-build-stamp
+debian/files
+
