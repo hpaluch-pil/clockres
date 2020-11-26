@@ -36,6 +36,9 @@ make install DESTDIR="%{buildroot}" prefix="%{_prefix}"
 # use  date  '+%a %b %d %Y' to get date in format:
 %changelog
 * Thu Nov 26 2020 Henryk Paluch <henryk.paluch@pickering.cz> 0.1-1
+- 1st RPM package build with Tito
+
+* Thu Nov 26 2020 Henryk Paluch <henryk.paluch@pickering.cz> 0.1-1
 - 1st RPM release using Tito
 
 
