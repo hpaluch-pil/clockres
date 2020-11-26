@@ -30,7 +30,7 @@ mkdir -p %{buildroot}/%{_bindir}
 make install DESTDIR="%{buildroot}" prefix="%{_prefix}"
 
 %files
-%license MIT
+%license LICENSE
 %{_bindir}/%{name}
 
 # use  date  '+%a %b %d %Y' to get date in format:
