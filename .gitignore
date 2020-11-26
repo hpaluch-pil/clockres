@@ -6,7 +6,7 @@
 
 # build files
 clockres.o
-clockres
+/clockres
 
 # Debian build files
 *.log
