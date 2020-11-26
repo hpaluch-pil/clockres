@@ -2,6 +2,7 @@
 *~
 *.swp
 *.bak
+*.tmp
 
 # build files
 clockres.o
@@ -12,4 +13,7 @@ clockres
 *.substvars
 debian/debhelper-build-stamp
 debian/files
+
+# RPM build files
+*.rpm
 

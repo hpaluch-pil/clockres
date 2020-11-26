@@ -1,0 +1,9 @@
+[buildconfig]
+#builder = tito.builder.Builder
+builder = tito.builder.NoTgzBuilder
+tagger = tito.tagger.VersionTagger
+changelog_do_not_remove_cherrypick = 0
+changelog_format = %s (%ae)
+# Force --offline - do not push anything without my consent...
+offline = "true"
+
