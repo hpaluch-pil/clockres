@@ -1,6 +1,7 @@
 # CLOKRES C program
 
-Simple program to query OS clock resolution using `clock_getres(3)` call.
+Simple program to query OS clock resolution using `clock_getres(2)` call.
+Such information can be useful if you plan to use `clock_gettime(2)` in your programs.
 
 # Setup
 
@@ -83,7 +84,7 @@ debuild -i -us -uc -S
 
 ## Building CentOS 7 package
 
-This projects uses tool [Tito](https://github.com/rpm-software-management/tito/blob/master/tito.spec)
+This projects uses tool [Tito](https://github.com/rpm-software-management/tito)
 
 Tested versions:
 - OS: `CentOS 7.9.2009` (see `/etc/redhat-release`)
