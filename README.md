@@ -7,6 +7,29 @@ Such information can be useful if you plan to use `clock_gettime(2)` in your pro
 
 ## On Linux
 
+Common setup:
+
+* install git:
+  ```bash
+  # on RHEL/CentOS 7,8...
+  sudo yum install -y git
+  # on Debian
+  sudo apt-get install -y git
+  # on OpenSUSE 15
+  sudo zypper in git-core
+  ```
+
+* clone this repository:
+  ```bash
+  mkdir -p ~/projects
+  cd ~/projects
+  git clone https://github.com/hpaluch-pil/clockres.git
+  cd clockres/
+  ```
+
+* follow instructions below...
+
+
 ### On Debian 10/amd64
 Tested on: Debian 10/amd64
 
@@ -111,5 +134,8 @@ To build latest tagged version from git, use:
 ```bash
 tito build --rpm
 ```
+
+RPMS are created in folder `/tmp/tito` including `/tmp/tito/x86_64`.
+
 
 
