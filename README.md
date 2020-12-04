@@ -105,6 +105,23 @@ under `chroot`:
 debuild -i -us -uc -S
 ```
 
+### Adding distribution tag
+
+It is often desirable to have unique name of binary packages for
+different Debian distribution - typically in form `+deb10u1` which means
+"for Debian 10 Update 1".  Currently there is this clumsy way to do this:
+
+```bash
+# use "source" for bash or "." for dash
+source /etc/os-release
+dch -v "0.1+deb${VERSION_ID}u1" -D $VERSION_CODENAME "Added final distribution tag"
+# and rebuild packages as usual
+debuild -i -us -uc -S
+# rollback modified debian/changelog
+git checkout -- debian/changelog
+```
+
+
 ## Building CentOS 7 package
 
 This projects uses tool [Tito](https://github.com/rpm-software-management/tito)
