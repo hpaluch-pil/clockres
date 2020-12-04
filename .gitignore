@@ -13,6 +13,8 @@ clockres.o
 *.substvars
 debian/debhelper-build-stamp
 debian/files
+/debian/.debhelper/
+/debian/clockres/
 
 # RPM build files
 *.rpm
