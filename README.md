@@ -89,6 +89,8 @@ make run
 
 ## Building Debian 10 package
 
+### Building with plain "debuild"
+
 You can now create native Debian packages thanks to
 metadata under `debian/` directory.
 
@@ -105,7 +107,7 @@ under `chroot`:
 debuild -i -us -uc -S
 ```
 
-### Adding distribution tag
+#### Adding distribution tag
 
 It is often desirable to have unique name of binary packages for
 different Debian distribution - typically in form `+deb10u1` which means
@@ -121,6 +123,22 @@ debuild -i -us -uc -S
 git checkout -- debian/changelog
 ```
 
+### Building with plain "git buildpackage"
+
+It is experimental.
+
+At first install required packages:
+
+```bash
+sudo apt-get install git-buildpackage pristine-tar
+```
+
+Then I can build Debian package using:
+```bash
+gbp buildpackage
+# packages are build into ../build-area/
+```
+WARNING! It will not work for you so far! It requiers my GPG key to sign all files.
 
 ## Building CentOS 7 package
 
