@@ -1,4 +1,0 @@
-clockres for Debian
-
-Utility that reports clock resolutions for clock_gettime(2) calls.
-
