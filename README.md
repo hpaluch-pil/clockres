@@ -3,10 +3,11 @@
 Simple program to query OS clock resolution using `clock_getres(2)` call.
 Such information can be useful if you plan to use `clock_gettime(2)` in your programs.
 
-WARNING! Since cfcd454 Debian specific files (the `debian/` directory) was
-moved from branch `master` to `debs/master`. Similarly since 0d5c1cb RPM
-specific files (`clockres.spec` and `.tito/*`) were moved from `master` branch
-to `rpms/master`.  So now there are these branches:
+WARNING! Since cfcd454502ff5815e8bf675ae8db11e331de1664 Debian specific files
+(the `debian/` directory) was moved from branch `master` to `debs/master`.
+Similarly since 0d5c1cb6cd7ebde9fec958dd28ef7de6577f4314 RPM specific files
+(`clockres.spec` and `.tito/*`) were moved from `master` branch to
+`rpms/master`.  So now there are these branches:
 
 * `master` - primary development branch. Only native source here (no package
    specific files allowed here)
@@ -101,7 +102,7 @@ make run
 
 ## Building Debian 10 package
 
-WARNING! Since cfcd454 the `debian/` directory was moved
+WARNING! Since cfcd454502ff5815e8bf675ae8db11e331de1664 the `debian/` directory was moved
 from `master` branch to `debs/master`. You therefore need
 to switch to `debs/master` branch before building Debian packages using:
 
@@ -162,9 +163,9 @@ WARNING! It will not work for you so far! It requires my GPG key to sign all fil
 
 ## Building CentOS 7 package
 
-WARNING! Since 0d5c1cb the RPM specific files were moved
-from `master` branch to `rpms/master`. You therefore need
-to switch to `rpms/master` branch before building RPM packages using:
+WARNING! Since 0d5c1cb6cd7ebde9fec958dd28ef7de6577f4314 the RPM specific files
+were moved from `master` branch to `rpms/master`. You therefore need to switch
+to `rpms/master` branch before building RPM packages using:
 
 ```bash
 git checkout rpms/master
