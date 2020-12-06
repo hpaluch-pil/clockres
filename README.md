@@ -3,6 +3,15 @@
 Simple program to query OS clock resolution using `clock_getres(2)` call.
 Such information can be useful if you plan to use `clock_gettime(2)` in your programs.
 
+WARNING! Since cfcd454 Debian specific files (the `debian/` directory)
+was moved from branch `master` to `debs/master`. So now there are these branches:
+
+* `master` - primary development branch. Only native source here (no package
+   specific files allowed here)
+* `debs/master` - this branch contains `debian/` directory necessary to build
+  Debian packages.
+* COMING: branch for RPMS
+
 # Setup
 
 ## On Linux
@@ -89,6 +98,14 @@ make run
 
 ## Building Debian 10 package
 
+WARNING! Since cfcd454 the `debian/` directory was moved
+from `master` branch to `debs/master`. You therefore need
+to switch to `debs/master` branch before building Debian packages using:
+
+```bash
+git checkout debs/master
+```
+
 ### Building with plain "debuild"
 
 You can now create native Debian packages thanks to
@@ -138,7 +155,7 @@ Then I can build Debian package using:
 gbp buildpackage
 # packages are build into ../build-area/
 ```
-WARNING! It will not work for you so far! It requiers my GPG key to sign all files.
+WARNING! It will not work for you so far! It requires my GPG key to sign all files.
 
 ## Building CentOS 7 package
 
