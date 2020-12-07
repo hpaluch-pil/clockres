@@ -3,17 +3,17 @@
 Simple program to query OS clock resolution using `clock_getres(2)` call.
 Such information can be useful if you plan to use `clock_gettime(2)` in your programs.
 
-WARNING! Since cfcd454502ff5815e8bf675ae8db11e331de1664 Debian specific files
-(the `debian/` directory) was moved from branch `master` to `debs/master`.
-Similarly since 0d5c1cb6cd7ebde9fec958dd28ef7de6577f4314 RPM specific files
-(`clockres.spec` and `.tito/*`) were moved from `master` branch to
-`rpms/master`.  So now there are these branches:
+WARNING! Since [cfcd454][cfcd454] Debian specific files
+(the `debian/` directory) was moved from branch [master][master] to [debs/master][debs-master].
+Similarly since [0d5c1cb][0d5c1cb] RPM specific files
+(`clockres.spec` and `.tito/*`) were moved from [master][master] branch to
+[rpms/master][rpms-master].  So now there are these branches:
 
-* `master` - primary development branch. Only native source here (no package
+* [master][master] - primary development branch. Only native source here (no package
    specific files allowed here)
-* `debs/master` - this branch contains `debian/` directory necessary to build
+* [debs/master][debs-master] - this branch contains `debian/` directory necessary to build
   Debian packages.
-* `rpms/master` - this branch contains `clockres.spec` and `.tito/` used
+* [rpms/master][rpms-master] - this branch contains `clockres.spec` and `.tito/` used
   to build RPM packages
 
 # Setup
@@ -102,9 +102,9 @@ make run
 
 ## Building Debian 10 package
 
-WARNING! Since cfcd454502ff5815e8bf675ae8db11e331de1664 the `debian/` directory was moved
-from `master` branch to `debs/master`. You therefore need
-to switch to `debs/master` branch before building Debian packages using:
+WARNING! Since [cfcd454][cfcd454] the `debian/` directory was moved
+from [master][master] branch to [debs/master][debs-master]. You therefore need
+to switch to [debs/master][debs-master] branch before building Debian packages using:
 
 ```bash
 git checkout debs/master
@@ -163,9 +163,9 @@ WARNING! It will not work for you so far! It requires my GPG key to sign all fil
 
 ## Building CentOS 7 package
 
-WARNING! Since 0d5c1cb6cd7ebde9fec958dd28ef7de6577f4314 the RPM specific files
-were moved from `master` branch to `rpms/master`. You therefore need to switch
-to `rpms/master` branch before building RPM packages using:
+WARNING! Since [0d5c1cb][0d5c1cb] the RPM specific files
+were moved from [master][master] branch to [rpms/master][rpms-master]. You therefore need to switch
+to [rpms/master][rpms-master] branch before building RPM packages using:
 
 ```bash
 git checkout rpms/master
@@ -201,5 +201,9 @@ tito build --rpm
 
 RPMS are created in folder `/tmp/tito` including `/tmp/tito/x86_64`.
 
-
+[cfcd454]:  https://github.com/hpaluch-pil/clockres/commit/cfcd454502ff5815e8bf675ae8db11e331de1664
+[0d5c1cb]:  https://github.com/hpaluch-pil/clockres/commit/0d5c1cb6cd7ebde9fec958dd28ef7de6577f4314
+[debs-master]: https://github.com/hpaluch-pil/clockres/tree/debs/master
+[rpms-master]: https://github.com/hpaluch-pil/clockres/tree/rpms/master
+[master]: https://github.com/hpaluch-pil/clockres/tree/master
 
