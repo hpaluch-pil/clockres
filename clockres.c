@@ -13,6 +13,8 @@
 #include <sys/syspage.h>
 #endif
 
+#define CLOCKRES_VER_STR "0.2"
+
 /* time measurement macros - Linux */
 
 #define MY_CLK_TIMING_ID CLOCK_MONOTONIC
@@ -89,6 +91,12 @@ int main(int argc, char **argv)
 	int ret = EXIT_SUCCESS;
 	int i;
 
+	printf("Clockres utility Version: %s", CLOCKRES_VER_STR );
+#ifdef __GNUC__
+	printf(" GCC: %d.%d.%d", __GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__);
+#endif
+	printf(" Build time: %s %s", __DATE__, __TIME__);
+	printf("\n\n");
 #ifdef USE_CLOCK_CYCLES
 	
 	printf("This OS Supports ClockCycles():\n");
@@ -112,6 +120,7 @@ int main(int argc, char **argv)
 			printf("%-32s => %16" PRIu64 " [ns]\n",MY_CLK_TABLE[i].clock_name,ns);
 		}
 	}
+	printf("\nSimple benchmark to test clock resolution:\n");
 	bench_sine();
 	return ret;
 }
