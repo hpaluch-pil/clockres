@@ -4,7 +4,7 @@ Simple program to query OS clock resolution using `clock_getres(2)` call.
 Such information can be useful if you plan to use `clock_gettime(2)` in your programs.
 
 WARNING! Since [cfcd454][cfcd454] Debian specific files
-(the `debian/` directory) was moved from branch [master][master] to [debs/master][debs-master].
+(the `debian/` directory) were moved from branch [master][master] to [debs/master][debs-master].
 Similarly since [0d5c1cb][0d5c1cb] RPM specific files
 (`clockres.spec` and `.tito/*`) were moved from [master][master] branch to
 [rpms/master][rpms-master].  So now there are these branches:
