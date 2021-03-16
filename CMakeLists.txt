@@ -25,9 +25,13 @@ set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-${CMAKE_SYSTEM_N
 add_executable(clockres clockres.c)
 set(CLOCKRES_LIBS m)
 # add -lrt if exist (required on most Linux/ARM platforms)
-find_library(RT_LIB rt)
-if (RT_LIB)
-	list(APPEND CLOCKRES_LIBS rt)
+# Must filter with Linux, becasue on QNX6 this library is mysteriously
+# detected as present (maybe crossbuild error?)
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	find_library(RT_LIB rt)
+	if (RT_LIB)
+		list(APPEND CLOCKRES_LIBS rt)
+	endif()
 endif()
 
 target_link_libraries(clockres PUBLIC ${CLOCKRES_LIBS})
