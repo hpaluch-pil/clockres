@@ -1,0 +1,41 @@
+#
+# CMakeLists.txt - cmake build file for clockres
+#
+
+### BUILD SECTION ###
+# under scratchbox we have cmake-3.0.2 
+# Recent versions does not build under old gcc4
+cmake_minimum_required(VERSION 3.0)
+
+project(clockres VERSION 0.2.0 LANGUAGES C)
+
+# simplified boilerplate from CMake presentation
+set(default_build_type "Release")
+if(NOT CMAKE_BUILD_TYPE)
+  message(STATUS
+  "Setting build type to '${default_build_type}' as none was specified.")
+  set(CMAKE_BUILD_TYPE "${default_build_type}" CACHE
+      STRING "Choose the type of build." FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
+    "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
+endif()
+
+set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${PROJECT_VERSION}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}")
+
+add_executable(clockres clockres.c)
+set(CLOCKRES_LIBS m)
+# add -lrt if exist (required on most Linux/ARM platforms)
+find_library(RT_LIB rt)
+if (RT_LIB)
+	list(APPEND CLOCKRES_LIBS rt)
+endif()
+
+target_link_libraries(clockres PUBLIC ${CLOCKRES_LIBS})
+
+### INSTALL SECTION ###
+install(TARGETS clockres DESTINATION bin)
+
+### PACK SECTION ###
+set(CPACK_GENERATOR "TGZ")
+include(CPack)
+

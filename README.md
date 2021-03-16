@@ -3,6 +3,9 @@
 Simple program to query OS clock resolution using `clock_getres(2)` call.
 Such information can be useful if you plan to use `clock_gettime(2)` in your programs.
 
+WARNING! This project is in transition from
+plain `make(1)` to `cmake(1)`
+
 WARNING! Since [cfcd454][cfcd454] Debian specific files
 (the `debian/` directory) were moved from branch [master][master] to [debs/master][debs-master].
 Similarly since [0d5c1cb][0d5c1cb] RPM specific files
@@ -49,54 +52,51 @@ Tested on: Debian 10/amd64
 Just install:
 
 ```bash
-sudo apt-get install build-essential
+sudo apt-get install build-essential cmake
 ```
 
 ### On CentOS 7
 
 ```bash
-sudo yum install gcc make
+sudo yum install gcc make cmake
 ```
 
 ## On Linux (continued)
 
-To build, just issue command:
+To build, run cmake wrapper script:
 
 ```bash
-make
+./rebuild_cmake_linux.sh
 ```
 
-## On scratchbox
+This also apply for `armel` build uner Nokia's scratchbox.
 
-To cross-build for ARM using scratchbox append `os=scratchbox` argument to `make` command,
-for example:
-
-```bash
-make os=scratchbox
-```
+However you need to download build and install cmake-3.0.2 by
+yourself first.
 
 ## On QNX 6.5.0SP1
+Tested on Linux Host (CentOS 5.4).
 
-Tested on Linux Host (CentOS 5.4). For build just use:
+For cmake build you need to:
+* download build and install cmake-3.0.2
+* and then just run:
+
+```bash
+./rebuild_cmake_qnx.sh
 ```
-/opt/qnx650/host/linux/x86/usr/bin/make os=qnx
-```
+
 ## On QNX7 `x86_64`
 
 Tested on Linux Host (Ubuntu 16.04.6 LTS). For build use:
 ```
 source ~/qnx700/qnxsdp-env.sh
-make os=qnx_x86_64
+./rebuild_cmake_qnx.sh
 ```
-
 
 # Run
 
 Obviously can be used for self-hosted builds (but cross-builds).
-
-```bash
-make run
-```
+Look for binary `clockres` under `~/tmp/build/clockres-*/`
 
 # Distribution
 
