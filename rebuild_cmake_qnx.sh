@@ -128,6 +128,7 @@ rm -rf $WORKSPACE/build/$p
 mkdir -p $WORKSPACE/build/$p
 cd $WORKSPACE/build/$p
 
+[ -z "$build_type" ] || args="$args -DCMAKE_BUILD_TYPE=$build_type"
 cmake -DCMAKE_TOOLCHAIN_FILE:PATH="$tc_file" \
 	$args $src
 
