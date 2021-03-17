@@ -122,6 +122,12 @@ tc_file="$src/cmake/toolchain_qnx${qnx_ver_major_minor}_${qnx_arch}.cmake"
 	exit 1
 }
 
+if [ -d ".git" ]; then
+	GIT_TAG_ID="clockres-$(git describe --always --dirty --long | sed 's/.*-g/g/')"
+	args="$args -DGIT_TAG_ID=\"$GIT_TAG_ID\""
+fi
+
+
 # always use hardcoded prefix to avoid disaster (rm -rf /) when variablei sempty
 set -x
 rm -rf $WORKSPACE/build/$p
