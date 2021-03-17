@@ -55,6 +55,12 @@ else
 	VERSION_ID=tk71
 fi
 
+if [ -d ".git" ]; then
+	GIT_TAG_ID="clockres-$(git describe --always --dirty --long | sed 's/.*-g/g/')"
+	args="$args -DGIT_ID=$GIT_TAG_ID"
+fi
+
+
 p=clockres-$ID-$VERSION_ID
 [ -z "$build_type" ] || p="$p-$build_type"
 

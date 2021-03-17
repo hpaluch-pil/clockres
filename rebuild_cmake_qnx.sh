@@ -124,7 +124,7 @@ tc_file="$src/cmake/toolchain_qnx${qnx_ver_major_minor}_${qnx_arch}.cmake"
 
 if [ -d ".git" ]; then
 	GIT_TAG_ID="clockres-$(git describe --always --dirty --long | sed 's/.*-g/g/')"
-	args="$args -DGIT_TAG_ID=\"$GIT_TAG_ID\""
+	args="$args -DGIT_ID=$GIT_TAG_ID"
 fi
 
 

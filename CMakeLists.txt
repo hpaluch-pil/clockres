@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(clockres VERSION 0.2.0 LANGUAGES C)
 
-set(GIT_TAG_ID "N/A" CACHE STRING "Git-tag ID to identify build")
+set(GIT_ID "N/A" CACHE STRING "Git-ID to identify build")
 
 # simplified boilerplate from CMake presentation
 set(default_build_type "Release")
@@ -34,12 +34,23 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 		list(APPEND CLOCKRES_LIBS rt)
 	endif()
 endif()
+if(QNX)
+	set_target_properties(clockres PROPERTIES
+		COMPILE_DEFINITIONS "USE_CLOCK_CYCLES")
+endif()
 
 target_link_libraries(clockres PUBLIC ${CLOCKRES_LIBS})
 # on QNX embedd metadata using usemsg
 if(QNX)
+	# variable is necessary to avoid passing \" and avoid parsing (2)
+	set(_desc "Reports clock resolutions using clock_getres(2) system calls")
 	add_custom_command(TARGET clockres POST_BUILD
-		COMMAND usemsg -i BUILD_CONFIG=${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE} -i TAGID="${GIT_TAG_ID}" -i DESCRIPTION="Reports clock resolutions using clock_getres system calls"  clockres ${PROJECT_SOURCE_DIR}/clockres.use
+		COMMAND usemsg
+		-i BUILD_CONFIG=${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}
+		-i TAGID=${GIT_ID}
+		-i DESCRIPTION=${_desc}
+		clockres ${PROJECT_SOURCE_DIR}/clockres.use
+		VERBATIM
 		)
 	add_custom_command(TARGET clockres POST_BUILD
 		COMMAND use -i ./clockres)
