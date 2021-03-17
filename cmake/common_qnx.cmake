@@ -8,6 +8,7 @@
 # - removed disabled sysroot (not supported by q++)
 set(CMAKE_SYSTEM_NAME QNX)
 set(CMAKE_C_COMPILER qcc)
+set(arch "gcc_nto${CMAKE_SYSTEM_PROCESSOR}")
 set(CMAKE_C_COMPILER_TARGET ${arch})
 # SDP 7.1 has not QCC anymore, but all have q++ (like g++)
 set(CMAKE_CXX_COMPILER q++)
