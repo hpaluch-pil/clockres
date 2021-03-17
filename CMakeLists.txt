@@ -49,11 +49,11 @@ if(QNX)
 		-i BUILD_CONFIG=${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}
 		-i TAGID=${GIT_ID}
 		-i DESCRIPTION=${_desc}
-		clockres ${PROJECT_SOURCE_DIR}/clockres.use
+		$<TARGET_FILE:clockres> ${PROJECT_SOURCE_DIR}/clockres.use
 		VERBATIM
 		)
 	add_custom_command(TARGET clockres POST_BUILD
-		COMMAND use -i ./clockres)
+		COMMAND use -i $<TARGET_FILE:clockres>)
 endif()
 
 ### INSTALL SECTION ###
