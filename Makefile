@@ -8,6 +8,12 @@ CFLAGS  += -g -Wall
 LDLIBS  += -lm
 LDFLAGS += -g
 
+# NOTE: Even hash (#) must be escaped to (\#) and obviously also ($) to ($$)
+CLOCKRES_VER := $(strip $(shell awk '/^\#define CLOCKRES_VER_STR/{print $$3}' clockres.c | tr -d '"' ))
+ifeq ($(CLOCKRES_VER),)
+$(error Unable to extract Version string from clockres.c )
+endif
+
 ifeq ($(os),qnx)
  CC=qcc
  CFLAGS += -DUSE_CLOCK_CYCLES
@@ -42,5 +48,14 @@ install: $(APP)
 uninstall:
 	-rm -f $(DESTDIR)$(prefix)/bin/$(APP)
 
-.PHONY: all rebuild run clean install uninstall
+PDIR := clockres-$(CLOCKRES_VER)
+ARCHIVE := $(PDIR).tar.gz
+dist: $(APP)
+	rm -f  build/*.tar.gz
+	rm -rf build/tree
+	mkdir -p build/tree/$(PDIR)
+	cp clockres.c Makefile LICENSE README.md build/tree/$(PDIR)
+	( cd build/tree && tar -cz --numeric-owner --owner=0 --group=0 -f ../$(ARCHIVE) $(PDIR)/  )
+
+.PHONY: all rebuild run clean install uninstall dist
 

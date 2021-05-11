@@ -3,16 +3,20 @@
 Simple program to query OS clock resolution using `clock_getres(2)` call.
 Such information can be useful if you plan to use `clock_gettime(2)` in your programs.
 
-WARNING! Since cfcd454 Debian specific files (the `debian/` directory) was
-moved from branch `master` to `debs/master`. Similarly since 0d5c1cb RPM
-specific files (`clockres.spec` and `.tito/*`) were moved from `master` branch
-to `rpms/master`.  So now there are these branches:
+WARNING! This project is in transition from
+plain `make(1)` to `cmake(1)`
 
-* `master` - primary development branch. Only native source here (no package
+WARNING! Since [cfcd454][cfcd454] Debian specific files
+(the `debian/` directory) were moved from branch [master][master] to [debs/master][debs-master].
+Similarly since [0d5c1cb][0d5c1cb] RPM specific files
+(`clockres.spec` and `.tito/*`) were moved from [master][master] branch to
+[rpms/master][rpms-master].  So now there are these branches:
+
+* [master][master] - primary development branch. Only native source here (no package
    specific files allowed here)
-* `debs/master` - this branch contains `debian/` directory necessary to build
+* [debs/master][debs-master] - this branch contains `debian/` directory necessary to build
   Debian packages.
-* `rpms/master` - this branch contains `clockres.spec` and `.tito/` used
+* [rpms/master][rpms-master] - this branch contains `clockres.spec` and `.tito/` used
   to build RPM packages
 
 # Setup
@@ -48,62 +52,59 @@ Tested on: Debian 10/amd64
 Just install:
 
 ```bash
-sudo apt-get install build-essential
+sudo apt-get install build-essential cmake
 ```
 
 ### On CentOS 7
 
 ```bash
-sudo yum install gcc make
+sudo yum install gcc make cmake
 ```
 
 ## On Linux (continued)
 
-To build, just issue command:
+To build, run cmake wrapper script:
 
 ```bash
-make
+./rebuild_cmake_linux.sh
 ```
 
-## On scratchbox
+This also apply for `armel` build uner Nokia's scratchbox.
 
-To cross-build for ARM using scratchbox append `os=scratchbox` argument to `make` command,
-for example:
-
-```bash
-make os=scratchbox
-```
+However you need to download build and install cmake-3.0.2 by
+yourself first.
 
 ## On QNX 6.5.0SP1
+Tested on Linux Host (CentOS 5.4).
 
-Tested on Linux Host (CentOS 5.4). For build just use:
+For cmake build you need to:
+* download build and install cmake-3.0.2
+* and then just run:
+
+```bash
+./rebuild_cmake_qnx.sh
 ```
-/opt/qnx650/host/linux/x86/usr/bin/make os=qnx
-```
+
 ## On QNX7 `x86_64`
 
 Tested on Linux Host (Ubuntu 16.04.6 LTS). For build use:
 ```
 source ~/qnx700/qnxsdp-env.sh
-make os=qnx_x86_64
+./rebuild_cmake_qnx.sh
 ```
-
 
 # Run
 
 Obviously can be used for self-hosted builds (but cross-builds).
-
-```bash
-make run
-```
+Look for binary `clockres` under `~/tmp/build/clockres-*/`
 
 # Distribution
 
 ## Building Debian 10 package
 
-WARNING! Since cfcd454 the `debian/` directory was moved
-from `master` branch to `debs/master`. You therefore need
-to switch to `debs/master` branch before building Debian packages using:
+WARNING! Since [cfcd454][cfcd454] the `debian/` directory was moved
+from [master][master] branch to [debs/master][debs-master]. You therefore need
+to switch to [debs/master][debs-master] branch before building Debian packages using:
 
 ```bash
 git checkout debs/master
@@ -162,9 +163,9 @@ WARNING! It will not work for you so far! It requires my GPG key to sign all fil
 
 ## Building CentOS 7 package
 
-WARNING! Since 0d5c1cb the RPM specific files were moved
-from `master` branch to `rpms/master`. You therefore need
-to switch to `rpms/master` branch before building RPM packages using:
+WARNING! Since [0d5c1cb][0d5c1cb] the RPM specific files
+were moved from [master][master] branch to [rpms/master][rpms-master]. You therefore need to switch
+to [rpms/master][rpms-master] branch before building RPM packages using:
 
 ```bash
 git checkout rpms/master
@@ -200,5 +201,9 @@ tito build --rpm
 
 RPMS are created in folder `/tmp/tito` including `/tmp/tito/x86_64`.
 
-
+[cfcd454]:  https://github.com/hpaluch-pil/clockres/commit/cfcd454502ff5815e8bf675ae8db11e331de1664
+[0d5c1cb]:  https://github.com/hpaluch-pil/clockres/commit/0d5c1cb6cd7ebde9fec958dd28ef7de6577f4314
+[debs-master]: https://github.com/hpaluch-pil/clockres/tree/debs/master
+[rpms-master]: https://github.com/hpaluch-pil/clockres/tree/rpms/master
+[master]: https://github.com/hpaluch-pil/clockres/tree/master
 

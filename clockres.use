@@ -1,0 +1,8 @@
+
+Prints clock resolutions as reported by clock_getres(2) calls.
+
+%C
+
+This command accepts no arguments.
+
+
