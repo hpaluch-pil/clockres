@@ -1,3 +1,9 @@
+clockres (0.1-2) stable; urgency=medium
+
+  * Now build w cmake(1)
+
+ --  Henryk Paluch <henryk.paluch@pickering.cz>  Tue, 11 May 2021 09:47:41 +0200
+
 clockres (0.1) stable; urgency=low
 
   * Initial Debian release.
