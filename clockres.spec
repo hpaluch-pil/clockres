@@ -1,6 +1,6 @@
 # clockres.spec for RedHat tito builder
 Name:           clockres
-Version:        0.1
+Version:        0.2
 Release:        1
 Summary:        Dump various clock resolutions for clock_gettime(2) calls
 
@@ -39,6 +39,9 @@ mkdir -p %{buildroot}/%{_bindir}
 
 # use  date  '+%a %b %d %Y' to get date in format:
 %changelog
+* Wed Feb 16 2022 Henryk Paluch <henryk.paluch@pickering.cz> 0.2-1
+- Build rpm with cmake (was make) (henryk.paluch@pickering.cz)
+
 * Thu Nov 26 2020 Henryk Paluch <henryk.paluch@pickering.cz> 0.1-1
 - 1st RPM package build with Tito
 
