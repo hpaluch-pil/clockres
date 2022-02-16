@@ -7,6 +7,9 @@
 # build files
 clockres.o
 /clockres
+/build/
+# debbuild+cmake directory
+/obj-*/
 
 # Debian build files
 *.log
