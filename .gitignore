@@ -22,3 +22,5 @@ debian/files
 # RPM build files
 *.rpm
 
+# bazel build symlinks
+/bazel-*

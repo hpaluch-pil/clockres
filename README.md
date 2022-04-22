@@ -93,6 +93,45 @@ source ~/qnx700/qnxsdp-env.sh
 ./rebuild_cmake_qnx.sh
 ```
 
+## Experimental: build with Bazel
+
+If you really like [Bazel](https://bazel.build/) - Google's building
+tool you can try it. Tested on openSUSE LEAP 15.3:
+
+Install these packages
+```bash
+sudo zypper in bazel gcc-c++
+```
+Run build:
+```bash
+# this shows available targets
+bazel query ...
+# run only target
+bazel build //:clockres
+
+```
+The reulting binary is (symlinked) as:
+```
+bazel-bin/clockres
+```
+
+Bugs:
+- Bazel always builds C++ binary (even when source is `*.c`)
+  - see https://github.com/bazelbuild/bazel/issues/2954
+  - you can verify it with command:
+    ```bash
+    ldd bazel-bin/clockres
+
+        linux-vdso.so.1 (0x00007ffed2f91000)
+        libstdc++.so.6 => /usr/lib64/libstdc++.so.6 (0x00007ff493bcb000)
+        libm.so.6 => /lib64/libm.so.6 (0x00007ff493880000)
+        libc.so.6 => /lib64/libc.so.6 (0x00007ff49348b000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007ff493fde000)
+        libgcc_s.so.1 => /lib64/libgcc_s.so.1 (0x00007ff493272000)
+    ```
+   - notice the `libstdc++.so.6` - should not be there...
+
+
 # Run
 
 Obviously can be used for self-hosted builds (but cross-builds).
