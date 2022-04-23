@@ -96,21 +96,34 @@ source ~/qnx700/qnxsdp-env.sh
 ## Experimental: build with Bazel
 
 If you really like [Bazel](https://bazel.build/) - Google's building
-tool you can try it. Tested on openSUSE LEAP 15.3:
+tool you can try it.
 
-Install these packages
+For openSUSE LEAP 15.3 Install these packages
+
 ```bash
-sudo zypper in bazel gcc-c++
+sudo zypper in git-core bazel gcc-c++ glibc-devel
 ```
+
+For Fedora 35 install these **unofficial** COPR packages (COPR is
+like SUSE's OBS - public package build service),
+see https://bazel.build/install/redhat
+```bash
+dnf install dnf-plugins-core
+dnf copr enable vbatts/bazel
+dnf install bazel4
+dnf install git-core gcc gcc-c++ glibc-devel
+```
+
 Run build:
 ```bash
 # this shows available targets
 bazel query ...
 # run only target
 bazel build //:clockres
-
 ```
-The reulting binary is (symlinked) as:
+
+The resulting binary is (symlinked) as:
+
 ```
 bazel-bin/clockres
 ```
