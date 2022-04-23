@@ -114,6 +114,28 @@ dnf install bazel4
 dnf install git-core gcc gcc-c++ glibc-devel
 ```
 
+For Debian 11 follow: https://bazel.build/install/ubuntu,
+approximately:
+- install GPG key
+  ```bash
+  sudo apt-get install apt-transport-https curl gnupg
+  curl -fsSLO https://bazel.build/bazel-release.pub.gpg
+  gpg --dearmor bazel-release.pub.gpg 
+  sudo cp bazel-release.pub.gpg.gpg /usr/share/keyrings/bazel-archive-keyring.gpg
+  ```
+- now create file `/etc/apt/sources.list.d/bazel.list`
+  with contents:
+  ```
+  deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8
+  ```
+- and finally
+  ```bash
+  sudo apt-get update
+  sudo apt-get install bazel
+  sudo apt-get install git-core g++ libc-dev libstdc++-10-dev
+  ```
+
+
 Run build:
 ```bash
 # this shows available targets
@@ -126,6 +148,13 @@ The resulting binary is (symlinked) as:
 
 ```
 bazel-bin/clockres
+```
+
+Once you are done, shutdown server (automatically run by first
+invocation of bazel):
+
+```bash
+bazel shutdown
 ```
 
 Bugs:
