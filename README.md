@@ -6,6 +6,9 @@ Such information can be useful if you plan to use `clock_gettime(2)` in your pro
 WARNING! This project is in transition from
 plain `make(1)` to `cmake(1)`
 
+WARNING #2 ! Now we can even (cross)build with 
+Google's [Bazel](https://bazel.build/start) - see sections below.
+
 WARNING! Since [cfcd454][cfcd454] Debian specific files
 (the `debian/` directory) were moved from branch [master][master] to [debs/master][debs-master].
 Similarly since [0d5c1cb][0d5c1cb] RPM specific files
@@ -69,7 +72,7 @@ To build, run cmake wrapper script:
 ./rebuild_cmake_linux.sh
 ```
 
-This also apply for `armel` build uner Nokia's scratchbox.
+This also apply for `armel` build under Nokia's scratchbox.
 
 However you need to download build and install cmake-3.0.2 by
 yourself first.
@@ -93,15 +96,16 @@ source ~/qnx700/qnxsdp-env.sh
 ./rebuild_cmake_qnx.sh
 ```
 
-## Experimental: build with Bazel
+## Build with Bazel
 
-If you really like [Bazel](https://bazel.build/) - Google's building
-tool you can try it.
+Now we can build with  [Bazel](https://bazel.build/) - Google's building
+tool.
 
-For openSUSE LEAP 15.3 Install these packages
+For openSUSE LEAP 15.3 Install these packages:
 
 ```bash
 sudo zypper in git-core bazel gcc-c++ glibc-devel
+sudo zypper in bazel python-devel python-xml
 ```
 
 For Fedora 35 install these **unofficial** COPR packages (COPR is
@@ -135,7 +139,6 @@ approximately:
   sudo apt-get install git-core g++ libc-dev libstdc++-10-dev
   ```
 
-
 Run build:
 ```bash
 # this shows available targets
@@ -144,9 +147,9 @@ bazel query ...
 bazel build //:clockres
 ```
 
-The resulting binary is (symlinked) as:
+The resulting binary is (symlinked) can be run as:
 
-```
+```bash
 bazel-bin/clockres
 ```
 
@@ -156,6 +159,37 @@ invocation of bazel):
 ```bash
 bazel shutdown
 ```
+
+## Cross-building for aarch64 with Bazel:
+
+Prepare Linaro toolchain (the target path is hardcoded):
+```bash
+cd
+curl -fLO https://releases.linaro.org/components/toolchain/binaries/7.2-2017.11/aarch64-linux-gnu/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz
+tar xvf gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu.tar.xz
+# WARNING! Symbolic link will not work - must be absolute canonical path
+sudo mv gcc-linaro-7.2.1-2017.11-x86_64_aarch64-linux-gnu /opt/aarch64-linux-gnu
+sudo chown root:root -R /opt/aarch64-linux-gnu/
+# quick test
+/opt/aarch64-linux-gnu/bin/aarch64-linux-gnu-gcc -dumpmachine
+# should print: aarch64-linux-gnu
+```
+
+To cross-build for `aarch64` using above Linaro cross-gcc in `/opt/aarch64-linux-gnu/`
+run this command:
+
+```bash
+bazel build --config=aarch64 '//:clockres'
+```
+
+To verify binary architecture try:
+```bash
+$ readelf -h bazel-bin/clockres | fgrep 'Machine:'
+
+  Machine:                           AArch64
+```
+
+Done!
 
 Bugs:
 - Bazel always builds C++ binary (even when source is `*.c`)
