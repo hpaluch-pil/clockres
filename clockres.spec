@@ -14,7 +14,7 @@ Source0:        %{name}-%{version}.tar.gz
 BuildRequires:  gcc make
 #BuildRequires:  cmake >= 3.0
 # on CentOS7 we have to use:
-BuildRequires:  cmake3 cmake3-data
+BuildRequires:  cmake cmake-data
 %description
 Provides simple utility 'clockres' that dumps clock resolutions
 for clock_gettime(2) calls. The resolution is gathered using
@@ -24,14 +24,14 @@ clock_getres(2) calls.
 %setup -q 
 
 %build
-%cmake3
-%cmake3_build
+%cmake
+%cmake_build
 
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_bindir}
 
-%cmake3_install
+%cmake_install
 
 %files
 %license LICENSE
