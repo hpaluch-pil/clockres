@@ -1,6 +1,6 @@
 # clockres.spec for RedHat tito builder
 Name:           clockres
-Version:        0.2
+Version:        0.3
 Release:        1
 Summary:        Dump various clock resolutions for clock_gettime(2) calls
 
@@ -39,6 +39,12 @@ mkdir -p %{buildroot}/%{_bindir}
 
 # use  date  '+%a %b %d %Y' to get date in format:
 %changelog
+* Fri Aug 21 2026 Henryk Paluch <henryk.paluch@pickering.cz> 0.3-1
+- Bump up minimum CMake version to 3.5 (was 3.0) - to support cmake 4+
+  (henryk.paluch@pickering.cz)
+- Remove remains of cmake3 macros (no longer exist)
+  (henryk.paluch@pickering.cz)
+
 * Wed Feb 16 2022 Henryk Paluch <henryk.paluch@pickering.cz> 0.2-1
 - Build rpm with cmake (was make) (henryk.paluch@pickering.cz)
 
