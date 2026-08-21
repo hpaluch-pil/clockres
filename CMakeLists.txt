@@ -3,9 +3,7 @@
 #
 
 ### BUILD SECTION ###
-# under scratchbox we have cmake-3.0.2 
-# Recent versions does not build under old gcc4
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(clockres VERSION 0.2.0 LANGUAGES C)
 
