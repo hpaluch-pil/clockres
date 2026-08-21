@@ -1,4 +1,4 @@
-# CLOKRES C program
+# CLOCKRES C program
 
 Simple program to query OS clock resolution using `clock_getres(2)` call.
 Such information can be useful if you plan to use `clock_gettime(2)` in your programs.
@@ -21,6 +21,10 @@ Similarly since [0d5c1cb][0d5c1cb] RPM specific files
   Debian packages.
 * [rpms/master][rpms-master] - this branch contains `clockres.spec` and `.tito/` used
   to build RPM packages
+
+Tips:
+* Fedora and AlmaLinux binaries are published on: https://copr.fedorainfracloud.org/coprs/hpaluch-pil/clockres/
+* openSUSE LEAP and Tumbleweed binaries are published on: https://build.opensuse.org/package/show/home:hpaluch-pil/clockres
 
 # Setup
 
