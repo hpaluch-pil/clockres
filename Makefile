@@ -5,14 +5,14 @@ VERSION=$(shell awk '/^Version:/ { print $$2 }' $(PROJECT).spec)
 
 all:
 	@echo "make clean - Get rid of scratch and byte files"
-	@echo "make source - Create source package"
+	@echo "make sources - Create source package"
 
-source: clean
+sources: clean
 	if test ! -d SOURCES; then mkdir SOURCES; fi
 	git archive --prefix="$(PROJECT)-$(VERSION)/" -o "SOURCES/$(PROJECT)-$(VERSION).tar.gz" HEAD
 
 clean:
 	rm -rf build/ MANIFEST BUILD BUILDROOT SPECS RPMS SRPMS SOURCES
 
-.PHONY: source clean
+.PHONY: sources clean
 
